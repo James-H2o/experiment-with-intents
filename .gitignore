@@ -1,0 +1,22 @@
+# --- IDE & Metadata ---
+# We ignore the entire .idea folder to keep local configurations private
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# --- Gradle & Build Outputs ---
+.gradle/
+**/build/
+
+# --- C++ / Native Build Artifacts ---
+# Even if not used, these keep the repo clean from IDE auto-gen folders
+.externalNativeBuild
+.cxx
+
+# --- Local & Sensitive Files ---
+local.properties
+.DS_Store
+
+# --- Android Studio Artifacts ---
+**/captures/

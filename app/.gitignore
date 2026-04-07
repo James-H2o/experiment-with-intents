@@ -1,0 +1,2 @@
+# Standard module-level ignore to ensure local build artifacts stay out of Git
+/build
