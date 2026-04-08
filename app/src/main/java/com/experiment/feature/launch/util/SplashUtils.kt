@@ -1,4 +1,4 @@
-package com.experiment.launch.util
+package com.experiment.feature.launch.util
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
