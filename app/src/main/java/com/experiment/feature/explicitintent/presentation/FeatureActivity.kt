@@ -1,5 +1,7 @@
 package com.experiment.feature.explicitintent.presentation
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,32 +24,51 @@ import com.experiment.ui.theme.ExperimentWithIntentsTheme
 class FeatureActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
+
         super.onCreate(savedInstanceState)
 
-        // Retrieve the data (using the modern API if on API 33+)
-        val data = if (android.os.Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra(FEATURE_ACTIVITY_DATA, FeatureActivityExtraModel::class.java)
+        // Retrieve data from Intent (using the modern API if on API 33+)
+        val data = if (Build.VERSION.SDK_INT >= 33) {
+            intent.getParcelableExtra(
+                FEATURE_ACTIVITY_DATA_KEY,
+                FeatureActivityExtraModel::class.java
+            )
         } else {
             @Suppress("DEPRECATION")
-            intent.getParcelableExtra(FEATURE_ACTIVITY_DATA)
+            intent.getParcelableExtra(FEATURE_ACTIVITY_DATA_KEY)
         }
 
         setContent {
             ExperimentWithIntentsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    FeatureEntryScreen(data, innerPadding)
+                    FeatureEntryScreen(
+                        data = data,
+                        innerPadding = innerPadding,
+                        onResult = { resultText ->
+                            val resultIntent = Intent().apply {
+                                putExtra(FEATURE_ACTIVITY_RETURN_KEY, resultText)
+                            }
+                            setResult(RESULT_OK, resultIntent)
+                            finish() // This closes the activity and sends the result back
+                        }
+                    )
                 }
             }
         }
     }
 
     companion object {
-        const val FEATURE_ACTIVITY_DATA = "feature_activity_data_key"
+        const val FEATURE_ACTIVITY_DATA_KEY = "feature_activity_data_key"
+        const val FEATURE_ACTIVITY_RETURN_KEY = "feature_activity_return_key"
     }
 }
 
 @Composable
-fun FeatureEntryScreen(data: FeatureActivityExtraModel?, innerPadding: PaddingValues) {
+fun FeatureEntryScreen(
+    data: FeatureActivityExtraModel?,
+    innerPadding: PaddingValues,
+    onResult: (String) -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -57,7 +78,9 @@ fun FeatureEntryScreen(data: FeatureActivityExtraModel?, innerPadding: PaddingVa
         Column(Modifier.wrapContentSize()) {
             Text(data?.thing ?: "Text not received")
             Button(
-                onClick = {},
+                onClick = {
+                    onResult("Back from the feature!")
+                },
             ) {
                 Text(
                     text = "Feature Button",
