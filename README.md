@@ -23,6 +23,7 @@ A laboratory project exploring Implicit and Explicit Intents in Android.
 - Persistent UI State: Utilizing rememberSaveable to ensure data integrity through configuration changes (like screen rotation).
 - Plain State Holder Pattern: Implemented a dedicated HomeScreenState class to manage complex UI logic, demonstrating an alternative to the "ViewModel-for-everything" approach.
 
+
 ### CI/CD
 - GitHub Actions Integration: Automated build, lint, and unit test verification on every push and pull request.
 - Branch Protection: Strict rules enforced on main and develop to ensure a stable "source of truth."
