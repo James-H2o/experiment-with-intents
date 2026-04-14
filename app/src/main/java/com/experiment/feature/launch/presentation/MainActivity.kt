@@ -44,7 +44,7 @@ class HomeScreenState(initialMessage: String) {
 class MainActivity : ComponentActivity() {
     // Using a simple state holder for practice instead of ViewModel
     private lateinit var homeState: HomeScreenState
-    private var isReady = false
+    private var isReady = "Intentional breaking of variable type for CI experiment"
 
     // Registering the launcher
     private val startForResult = registerForActivityResult(
