@@ -1,6 +1,8 @@
 # Experiment with Intents
 A laboratory project exploring Implicit and Explicit Intents in Android.
 
+![Build Status](https://github.com/James-H2o/experiment-with-intents/actions/workflows/ci.yml/badge.svg)
+
 ### Topics Practiced
 
 #### Round 1 of commits
@@ -20,3 +22,10 @@ A laboratory project exploring Implicit and Explicit Intents in Android.
 - Lifecycle-Aware State: Using remember to persist data across recompositions.
 - Persistent UI State: Utilizing rememberSaveable to ensure data integrity through configuration changes (like screen rotation).
 - Plain State Holder Pattern: Implemented a dedicated HomeScreenState class to manage complex UI logic, demonstrating an alternative to the "ViewModel-for-everything" approach.
+
+
+### CI/CD
+- GitHub Actions Integration: Automated build, lint, and unit test verification on every push and pull request.
+- Branch Protection: Strict rules enforced on main and develop to ensure a stable "source of truth."
+- Git Flow Architecture: Utilizes a multi-branch strategy to separate work-in-progress features from stable releases.
+- Automated Quality Gates: Prevents merging code that fails static analysis (Lint) or functional requirements.
